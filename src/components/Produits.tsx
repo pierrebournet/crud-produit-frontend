@@ -53,10 +53,10 @@ const Produits = () => {
   const handleSave = async () => {
     if (selectedProduit) {
       if (selectedProduit.id) {
-        // update existing product
+        // modifier produit existant
         await updateProduit(selectedProduit.id, selectedProduit);
       } else {
-        // add new product
+        // add nouveau produit
         await createProduit(selectedProduit);
       }
     }
