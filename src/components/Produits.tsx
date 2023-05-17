@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Col, Row, Button, Table, Container } from 'react-bootstrap';
 import { fetchProduits, createProduit, updateProduit, deleteProduit } from '../api';
+import './Produits.css';
+
 
 export interface Produit {
   id: number;
@@ -80,14 +82,14 @@ const Produits = () => {
   };
 
   return (
-    <Container fluid className="p-5">
+    <Container fluid >
       <Row className="bg-primary text-white p-2">
         <Col xs={12}>
           <h3 className="text-center">Produits</h3>
         </Col>
       </Row>
       <Row style={{ display: showForm ? "block" : "none" }}>
-        <Col xs={12}>
+        <Col xs={12} md={8} className="mx-auto">
           <h3 className="text-center">
             {selectedProduit ? "Editer" : "Ajouter"} un produit
           </h3>
@@ -138,13 +140,13 @@ const Produits = () => {
       <Row>
         <Col xs={12}>
           <h3 className="text-center">Liste des produits</h3>
-          <Table striped bordered hover>
+          <Table striped bordered hover responsive className="w-auto">
             <thead>
               <tr>
                 <th>#</th>
                 <th>Nom</th>
                 <th>Prix</th>
-                <th>Quantité</th>
+                <th className="d-none d-md-table-cell">Quantité</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -154,12 +156,22 @@ const Produits = () => {
                   <td>{index + 1}</td>
                   <td>{produit.nom}</td>
                   <td>{produit.prix}</td>
-                  <td>{produit.quantite}</td>
+                  <td className="d-none d-md-table-cell">{produit.quantite}</td>
                   <td>
-                    <Button variant="primary" className='mr-2' onClick={() => handleEdit(produit)}>
+                    <Button
+                      variant="primary"
+                      className="d-md-inline mr-2"
+                      size="sm"
+                      onClick={() => handleEdit(produit)}
+                    >
                       Editer
                     </Button>{" "}
-                    <Button variant="danger" className='mr-2' onClick={() => handleDelete(produit.id)}>
+                    <Button
+                      variant="danger"
+                      className="d-md-inline mr-2"
+                      size="sm"
+                      onClick={() => handleDelete(produit.id)}
+                    >
                       Supprimer
                     </Button>
                   </td>
@@ -171,6 +183,6 @@ const Produits = () => {
       </Row>
     </Container>
   );
-}
+              }  
 
 export default Produits;
